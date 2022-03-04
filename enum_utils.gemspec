@@ -7,7 +7,6 @@ Gem::Specification.new do |spec|
   spec.version       = EnumUtils::VERSION
   spec.authors       = ['Max Chernyak']
   spec.email         = ['hello@max.engineer']
-
   spec.summary       = 'Functions for mixing and matching lazy, potentially ' \
                        'infinite enumerables.'
   spec.homepage      = 'https://github.com/maxim/enum_utils'
