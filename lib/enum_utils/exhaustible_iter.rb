@@ -6,9 +6,9 @@ module EnumUtils
 
     attr_reader :buff_value
 
-    def initialize(source); @source = source; pull   end
-    def exhausted?;         @buff_value == EXHAUSTED end
-    def next;               @buff_value.tap { pull } end
+    def initialize(source); @source = source; pull        end
+    def exhausted?;         @buff_value.equal?(EXHAUSTED) end
+    def next;               @buff_value.tap { pull }      end
 
     private
 

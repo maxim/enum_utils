@@ -27,6 +27,30 @@ class SortedIntersectionTest < EnumUtilsTest
     assert_equal [], subject([]).to_a
   end
 
+  def test_comparable
+    class1 = Class.new do
+      include Comparable
+      def value; 1 end
+      def <=>(o); value <=> o.value end
+    end
+
+    obj1 = class1.new
+    assert_equal [obj1], subject([obj1]).to_a
+  end
+
+  def test_two_comparables
+    class1 = Class.new do
+      include Comparable
+      attr_reader :value
+      def initialize(value); @value = value end
+      def <=>(o); value <=> o.value end
+    end
+
+    obj1 = class1.new(1)
+    obj2 = class1.new(2)
+    assert_equal [obj1, obj2], subject([obj1, obj2]).to_a
+  end
+
   def test_enums
     assert_equal [3, 3], subject([3,3,3], [3,3]).to_a
   end

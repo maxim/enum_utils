@@ -33,6 +33,30 @@ class SortedMergeTest < EnumUtilsTest
     assert_equal [], subject([]).to_a
   end
 
+  def test_comparable
+    class1 = Class.new do
+      include Comparable
+      def value; 1 end
+      def <=>(o); value <=> o.value end
+    end
+
+    obj1 = class1.new
+    assert_equal [obj1], subject([obj1]).to_a
+  end
+
+  def test_two_comparables
+    class1 = Class.new do
+      include Comparable
+      attr_reader :value
+      def initialize(value); @value = value end
+      def <=>(o); value <=> o.value end
+    end
+
+    obj1 = class1.new(1)
+    obj2 = class1.new(2)
+    assert_equal [obj1, obj2], subject([obj1, obj2]).to_a
+  end
+
   def test_enums_without_index
     assert_equal [1,1,2,2,2,3,5], subject([1,2], [2,3], [1,2,5]).to_a
   end

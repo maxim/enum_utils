@@ -29,6 +29,10 @@ class RoundRobinTest < EnumUtilsTest
     assert_raises(StopIteration) { enum.next }
   end
 
+  def test_one
+    assert_equal [1], subject([1]).to_a
+  end
+
   def test_empty
     assert_equal [], subject([]).to_a
   end
